@@ -10,9 +10,12 @@ This template should help get you started developing with Tauri, React and Types
 
 ## Notes
 - `npm run tauri dev`
-- `pyinstaller -F [PATH]` (if modules installed in conda env, make sure to do `conda install -c conda-forge pyinstaller` instead of `pip install pyinstaller`)
+- `pyinstaller -F --distpath src-tauri/binaries src/youtube.py` 
+    - (if modules for script installed in conda env, make sure to do `conda install -c conda-forge pyinstaller` instead of `pip install pyinstaller`)
 - add target triple architecture at end of binary e.g., `youtube-x86_64-apple-darwin` or `hi-x86_64-apple-darwin`
 
-## Dev log
-- need to add python code as sidecar after turning into binary
-- 
+## Dev log / todo
+- ✅ added python code as sidecar after turning into binary
+- ✅ make sure `src-tauri/default.profraw` is read only!!
+- need to use pyinstaller on a windows device to compile binary for diff architecture
+- try release and see if it works on mmy comp

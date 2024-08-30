@@ -17,13 +17,13 @@ fn main() {
 use tauri::command;
 use std::process::Command;
 
-#[command]
-fn run_executable(path: &str, args: Vec<String>) -> Result<String, String> {
-    let output = Command::new(path) // Path to executable
-        .args(args) // args for exe
-        .output()
-        .map_err(|e| e.to_string())?;
+// #[command]
+// fn run_executable(path: &str, args: Vec<String>) -> Result<String, String> {
+//     let output = Command::new(path) // Path to executable
+//         .args(args) // args for exe
+//         .output()
+//         .map_err(|e| e.to_string())?;
 
-    let output_str = String::from_utf8_lossy(&output.stdout).to_string();
-    Ok(output_str)
-}
+//     let output_str = String::from_utf8_lossy(&output.stdout).to_string();
+//     Ok(output_str)
+// }

@@ -3,13 +3,13 @@ from pathlib import Path
 import yt_dlp
 import argparse
 
-# parser = argparse.ArgumentParser(description='Download audio from YouTube')
-# parser.add_argument('url', metavar='URL', type=str)
-# args = parser.parse_args()
+parser = argparse.ArgumentParser(description='Download audio from YouTube')
+parser.add_argument('url', metavar='URL', type=str)
+args = parser.parse_args()
 
-# URL = args.url
-URL = "https://www.youtube.com/watch?v=8piyzDXN9qw"
+URL = args.url
 
+# URL = "https://www.youtube.com/watch?v=8piyzDXN9qw"
 
 if os.name == 'nt':  # Windows
     downloads_folder = Path(os.environ['USERPROFILE']) / 'Downloads'
@@ -17,7 +17,9 @@ elif os.name == 'posix':  # macOS or Linux
     downloads_folder = Path.home() / 'Downloads'
 else:
     raise OSError('Unsupported operating system')
-print("====== Downloads folder: " + str(downloads_folder))
+
+print("====== Downloads folder: " + str(downloads_folder), flush=True)
+
 
 ydl_opts = {
     'format': 'm4a/bestaudio/best',
@@ -39,8 +41,5 @@ with yt_dlp.YoutubeDL(ydl_opts) as ydl:
     if title == None:
         title = "Unknown"
         
-    print("====== Title: " + title)
-    print("====== Artist: " + artist)
-    
-    
-    
+    print("====== Title: " + title, flush=True)
+    print("====== Artist: " + artist, flush=True)

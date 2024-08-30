@@ -17,8 +17,10 @@
         "open": true,
         "sidecar": true,
         "scope": [
-          { "name": "binaries/youtube", 
-            "sidecar": true
+          {
+            "name": "binaries/youtube",
+            "sidecar": true,
+            "args": true
           }
         ]
       }

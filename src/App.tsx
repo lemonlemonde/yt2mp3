@@ -1,20 +1,36 @@
 // @ts-check
 
 import { useState } from "react";
-import { invoke } from "@tauri-apps/api/tauri";
-import "./App.css";
 import { Command } from '@tauri-apps/api/shell'
+import "./App.css";
 
 function App() {
   const [resultMsg, setResultMsg] = useState("");
   const [url, setUrl] = useState("");
 
   async function download() {
+    // print current time
+    const now = new Date();
+    console.log("Download started at: ", now);
+
     const test = "https://www.youtube.com/watch?v=8piyzDXN9qw"
-    const command = Command.sidecar('binaries/youtube')
-    const output = await command.execute()
-    // setResultMsg(await invoke('run_executable', { path: exe_path, args: args }));
+    // const args = { url: url};
+
+    const command = Command.sidecar('binaries/youtube', test);
+    command.spawn();
+    // std in and stderr from command
+    command.stdout.on('data', (line) => {
+      console.log(line);
+    });
+    command.on('error', (line) => {
+      console.log(line);
+    });
+
+    const output = await command.execute();
+
     console.log("Downloaded URL: ", url);
+    const finished = new Date();
+    console.log("Download ended at: ", finished);
   }
 
   return (
