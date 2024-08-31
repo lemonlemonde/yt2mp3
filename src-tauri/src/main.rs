@@ -14,8 +14,8 @@ fn main() {
         .expect("error while running tauri application");
 }
 
-use tauri::command;
-use std::process::Command;
+// use tauri::command;
+// use std::process::Command;
 
 // #[command]
 // fn run_executable(path: &str, args: Vec<String>) -> Result<String, String> {

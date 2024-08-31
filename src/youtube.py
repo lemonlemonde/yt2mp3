@@ -27,19 +27,37 @@ ydl_opts = {
     'postprocessors': [{  # Extract audio using ffmpeg
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'm4a',
+    }, {
+        'key': 'FFmpegMetadata',  # Embed metadata into the file
     }],
     'outtmpl': str(os.path.join(downloads_folder, '%(title)s.%(ext)s'))
 }
 
 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    error_code = ydl.download(URL)
-    info = ydl.extract_info(URL, download=False)
-    title = info['title']
-    artist = info['uploader']
-    if artist == None:
-        artist = "Unknown"
-    if title == None:
-        title = "Unknown"
+    info = ydl.extract_info(URL, download=True)
+    
+    artist = info.get('artist') or 'Unknown Artist'
+    title = info.get('title') or 'Unknown Title'
         
-    print("====== Title: " + title, flush=True)
-    print("====== Artist: " + artist, flush=True)
+    # Use ffmpeg to apply the metadata to the downloaded file
+    filepath = os.path.join(downloads_folder, f"{info['title']}.m4a")
+
+    # # Adding metadata to the file
+    # ydl_opts_with_metadata = {
+    #     'postprocessors': [{
+    #         'key': 'FFmpegMetadata',
+    #         'add_metadata': True,
+    #         'metadata': {
+    #             'artist': artist,
+    #             'title': title
+    #         }
+    #     }],
+    # }
+
+
+    # # Re-run yt-dlp with the modified metadata options
+    # with yt_dlp.YoutubeDL(ydl_opts_with_metadata) as ydl_with_metadata:
+    #     ydl_with_metadata.post_process([{
+    #         'filepath': filepath,
+    #         'info_dict': info,
+    #     }])
