@@ -67,11 +67,11 @@ function App() {
 
     const target_url = url;
 
-    // // clear input field
-    // const input = document.getElementById("url-input") as HTMLInputElement
-    // if (input != null) {
-    //   input.value = "";
-    // }
+    // clear input field
+    const input = document.getElementById("url-input") as HTMLInputElement
+    if (input != null) {
+      input.value = "";
+    }
     setUrl("");
 
     console.log("Adding to queue: ", target_url);
@@ -108,11 +108,17 @@ function App() {
     setResultMsg("Starting download...");
     
     // start download
+    let result_title = "";
+    let result_artist = "";
     const command = Command.sidecar('binaries/youtube', String(target_url));
     command.spawn();
     // std in and stderr from command
     command.stdout.on('data', (line) => {
       console.log("==============", line);
+      if (line.includes("RESULT--TITLE:")) {
+        result_title = line.split(line.indexof("RESULT--TITLE:") + 1, line.indexof("--ARTIST:"));
+        result_artist = line.split(line.indexof("RESULT--ARTIST:") + 1, line.length);
+      }
       setResultMsg(line);
     });
     command.on('error', (line) => {
@@ -125,7 +131,7 @@ function App() {
     // on finish
     const finished = new Date();
     console.log(finished, ": Download complete for URL: \n", target_url);
-    setResultMsg("Download complete for URL: \n" + target_url);
+    setResultMsg("Download complete for [" + result_title + " - " + result_artist + "] from: " + target_url);
 
     // if (curUrls[0]) {
     //   console.log("curUrls: ", curUrls);
@@ -138,10 +144,10 @@ function App() {
 
 
     // add to completeUrls
-    // completeUrls.push({url: target_url});
-    // setCompleteUrls(completeUrls);
     console.log("[download]: Adding to completeUrls: ", target_url);
-    setCompleteUrls([...completeUrls, { url: target_url }]);  
+    setCompleteUrls((prevCompleteUrls) => {
+      return [...prevCompleteUrls, { url: result_title + " - " + result_artist + " - " + target_url }];
+    });  
 
     return "Download complete!";
   }

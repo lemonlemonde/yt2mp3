@@ -27,7 +27,7 @@ def main():
         # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
         'postprocessors': [{  # Extract audio using ffmpeg
             'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'm4a',
+            'preferredcodec': 'mp3',
         }, {
             'key': 'FFmpegMetadata',  # Embed metadata into the file
         }],
@@ -40,8 +40,8 @@ def main():
         artist = info.get('artist') or 'Unknown Artist'
         title = info.get('title') or 'Unknown Title'
             
-        # Use ffmpeg to apply the metadata to the downloaded file
-        filepath = os.path.join(downloads_folder, f"{info['title']}.m4a")
+        # # Use ffmpeg to apply the metadata to the downloaded file
+        # filepath = os.path.join(downloads_folder, f"{info['title']}.m4a")
 
         # # Adding metadata to the file
         # ydl_opts_with_metadata = {
@@ -64,9 +64,11 @@ def main():
         #     }])
         
         
+    if (title == 'Unknown Title' or artist == 'Unknown Artist' or title == "" or artist == ""):
+        artist, title = info['title'].split(' - ')
     print("Successfully downloaded title: " + title + " by " + artist, flush=True)
 
-    return title, artist
+    print("RESULT--TITLE:" + title + "--ARTIST:" + artist, flush=True)
 
 if __name__ == '__main__':
     main()
