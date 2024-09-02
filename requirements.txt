@@ -1,19 +1,20 @@
-altgraph @ file:///home/conda/feedstock_root/build_artifacts/altgraph_1695642967802/work
+altgraph==0.17.4
 Brotli==1.1.0
 certifi==2024.7.4
 charset-normalizer==3.3.2
 idna==3.7
-importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1724187233579/work
-macholib @ file:///home/conda/feedstock_root/build_artifacts/macholib_1695643090386/work
+importlib_metadata==8.4.0
+macholib==1.16.3
 mutagen==1.47.0
-packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1718189413536/work
+packaging==24.1
+pip==23.3.1
 pycryptodomex==3.20.0
-pyinstaller @ file:///Users/runner/miniforge3/conda-bld/pyinstaller_1723448737444/work
-pyinstaller-hooks-contrib @ file:///home/conda/feedstock_root/build_artifacts/pyinstaller-hooks-contrib_1723275433583/work
+pyinstaller==6.10.0
+pyinstaller-hooks-contrib==2024.8
 requests==2.32.3
 setuptools==68.2.2
 urllib3==2.2.2
 websockets==13.0
 wheel==0.41.2
 yt-dlp==2024.8.21.232751.dev0
-zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1724730934107/work
+zipp==3.20.1
