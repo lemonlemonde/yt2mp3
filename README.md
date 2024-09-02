@@ -13,6 +13,8 @@ This template should help get you started developing with Tauri, React and Types
 - `pyinstaller -F --distpath src-tauri/binaries src/youtube.py` 
     - (if modules for script installed in conda env, make sure to do `conda install -c conda-forge pyinstaller` instead of `pip install pyinstaller`)
 - add target triple architecture at end of binary e.g., `youtube-x86_64-apple-darwin` or `hi-x86_64-apple-darwin`
+- `pip install -r requirements.txt`
+- possibly `pip install ffmpeg`?
 
 ## Dev log / todo
 - ✅ added python code as sidecar after turning into binary
