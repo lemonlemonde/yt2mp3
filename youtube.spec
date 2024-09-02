@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['src/youtube.py'],
+    ['src\\youtube.py'],
     pathex=[],
     binaries=[],
     datas=[],

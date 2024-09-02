@@ -36,18 +36,24 @@ def main():
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(URL, download=True)
-        
-        artist = info.get('artist') or 'Unknown Artist'
-        title = info.get('title') or 'Unknown Title'
-        
-        print("====== Finished download", flush=True)
-        
-        if (title == 'Unknown Title' or artist == 'Unknown Artist' or title == "" or artist == ""):
-            artist, title = info['title'].split(' - ')
-        print("Successfully downloaded title: " + title + " by " + artist, flush=True)
+        try:
+            info = ydl.extract_info(URL, download=True)
+        except Exception as e:
+            print("====== Error, trying extracting info again", flush=True)
+            info = ydl.extract_info(URL, download=False)
+            artist = info.get('artist') or 'Unknown Artist'
+            title = info.get('title') or 'Unknown Title'
+            
+            print("====== Finished download", flush=True)
+            
+            print("Successfully downloaded title: ", str(title), " by ", str(artist), flush=True)
+            if (str(title) == 'Unknown Title' or str(artist) == 'Unknown Artist' or str(title) == "" or str(artist) == ""):
+                split_output = info['title'].split(' - ')
+                if (len(split_output) > 1):
+                    artist = split_output[0]
+                    title = split_output[1]
 
-        print("RESULT--TITLE:" + title + "--ARTIST:" + artist, flush=True)
+            print("START_RESULT--TITLE:", str(title), "--ARTIST:", str(artist), "--END_RESULT", flush=True)
 
 if __name__ == '__main__':
     main()

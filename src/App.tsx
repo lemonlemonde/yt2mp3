@@ -115,10 +115,6 @@ function App() {
     // std in and stderr from command
     command.stdout.on('data', (line) => {
       console.log("==============", line);
-      if (line.includes("RESULT--TITLE:")) {
-        result_title = line.split(line.indexOf("RESULT--TITLE:") + 1, line.indexOf("--ARTIST:"));
-        result_artist = line.split(line.indexOf("RESULT--ARTIST:") + 1, line.length);
-      }
       setResultMsg(line);
     });
     command.on('error', (line) => {
@@ -130,6 +126,12 @@ function App() {
     console.log("*********** =========== ************* PYTHON OUTPUT", output);
     console.log("***** output out:", output.stdout);
     console.log("***** output err:", output.stderr);
+    if (output.stdout.includes("START_RESULT--")) {
+      console.log("*********** =========== *************** FOUND RESULT");
+      const line = String(output.stdout);
+      result_title = line.substring(line.indexOf("TITLE:") + 7, line.indexOf("--ARTIST:"));
+      result_artist = line.substring(line.indexOf("ARTIST:") + 8, line.indexOf("--END_RESULT"));
+    }
 
     // on finish
     const finished = new Date();
