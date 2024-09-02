@@ -116,17 +116,20 @@ function App() {
     command.stdout.on('data', (line) => {
       console.log("==============", line);
       if (line.includes("RESULT--TITLE:")) {
-        result_title = line.split(line.indexof("RESULT--TITLE:") + 1, line.indexof("--ARTIST:"));
-        result_artist = line.split(line.indexof("RESULT--ARTIST:") + 1, line.length);
+        result_title = line.split(line.indexOf("RESULT--TITLE:") + 1, line.indexOf("--ARTIST:"));
+        result_artist = line.split(line.indexOf("RESULT--ARTIST:") + 1, line.length);
       }
       setResultMsg(line);
     });
     command.on('error', (line) => {
       console.log(line);
+      setResultMsg("**[ERROR]**: " + line);
     });
     
     const output = await command.execute();
-    console.log("*********** =========== ************* PYTHON OUTPUT", String(output));
+    console.log("*********** =========== ************* PYTHON OUTPUT", output);
+    console.log("***** output out:", output.stdout);
+    console.log("***** output err:", output.stderr);
 
     // on finish
     const finished = new Date();
@@ -168,7 +171,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Add YouTube URL here</h1>
+      <h1>YouTube mp3 downloader</h1>
 
       <p>Click to download!</p>
 
@@ -176,9 +179,16 @@ function App() {
         className="row"
         onSubmit={(e) => {
           e.preventDefault();
-          if (url) {
+          const test = url.replace(/\s/g, "");
+          if (test) {
             submitUrl();
           } else {
+            // clear input field
+            const input = document.getElementById("url-input") as HTMLInputElement
+            if (input != null) {
+              input.value = "";
+            }
+            setUrl("");
             setResultMsg("Please enter a URL");
           }
         }}

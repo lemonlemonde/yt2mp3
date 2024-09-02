@@ -19,9 +19,12 @@ This template should help get you started developing with Tauri, React and Types
 ## Dev log / todo
 - ✅ added python code as sidecar after turning into binary
 - ✅ make sure `src-tauri/default.profraw` is read only!!
-- need to use pyinstaller on a windows device to compile binary for diff architecture
+- ✅ need to use pyinstaller on a windows device to compile binary for diff architecture
 - try building into complete and see if it works on mmy comp
+- Make python sidecar command a persistent process!!! and keep feeding urls until quit!!! it'll be much faster b/c no more heavy imports!
 - try torify???? Use Tor to switcheroo IP addresses with yt-dl --proxy in case YouTube decides it doesn't like me?
     - check out: https://github.com/yt-dlp/yt-dlp/issues/3129#issuecomment-1575139548
     - https://linuxaria.com/howto/how-to-anonymize-the-programs-from-your-terminal-with-torify
-    
+- just spawn a shell command instead of the python binary. Potentially much faster? (wait but what about the installs required?)
+- mp3 or m4a?
+- 
