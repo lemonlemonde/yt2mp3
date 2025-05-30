@@ -1,12 +1,12 @@
-# Tauri + React + Typescript
+## What is?
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+Tauri app for downloading YouTube videos as audio files.
 
-## Recommended IDE Setup
+Very much work in progress -- it just doesn't download sometimes, due to YouTube verifying cookies, maybe.
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+But I don't think I'll be touching this for a while...
 
-
+As far as I remember, it worked on both Mac and Windows, but need to rename some files when turning into binary. Add the triple architecture.
 
 ## Notes
 - `npm run tauri dev`
